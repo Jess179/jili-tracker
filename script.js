@@ -1,28 +1,63 @@
-// Sample game data - In production, this would come from an API
+// =====================================
+// ARENA PLUS PHILIPPINES - REAL-TIME GAME TRACKER
+// =====================================
+
+// NOTE: This currently uses SIMULATED data for demo purposes.
+// To get REAL-TIME data from Arena Plus Philippines, you need to:
+// 1. Get API credentials from Arena Plus
+// 2. Replace the simulateDataUpdate() function with actual API calls
+// 3. Update the API endpoint to your Arena Plus API source
+
+// Sample game data - Arena Plus Philippines Popular Games
 const gameDatabase = [
-    { id: 1, name: 'Dragon Gold', percentage: 87.5, players: 2341, trend: 'up', lastUpdate: new Date() },
-    { id: 2, name: 'Golden Jaguar', percentage: 76.3, players: 1856, trend: 'down', lastUpdate: new Date() },
-    { id: 3, name: 'Book of Fortune', percentage: 72.8, players: 1543, trend: 'stable', lastUpdate: new Date() },
-    { id: 4, name: 'Phoenix Rising', percentage: 85.2, players: 2105, trend: 'up', lastUpdate: new Date() },
-    { id: 5, name: 'Gems Rush', percentage: 68.9, players: 892, trend: 'down', lastUpdate: new Date() },
-    { id: 6, name: 'Lucky King', percentage: 79.4, players: 1623, trend: 'up', lastUpdate: new Date() },
-    { id: 7, name: 'Aztec Treasures', percentage: 74.6, players: 1345, trend: 'stable', lastUpdate: new Date() },
-    { id: 8, name: 'Ocean Riches', percentage: 81.7, players: 1987, trend: 'up', lastUpdate: new Date() },
-    { id: 9, name: 'Temple Quest', percentage: 71.2, players: 1102, trend: 'down', lastUpdate: new Date() },
-    { id: 10, name: 'Golden Egg', percentage: 88.1, players: 2456, trend: 'up', lastUpdate: new Date() },
-    { id: 11, name: 'Safari Gold', percentage: 75.9, players: 1234, trend: 'stable', lastUpdate: new Date() },
-    { id: 12, name: 'Slots Paradise', percentage: 82.3, players: 1789, trend: 'up', lastUpdate: new Date() },
+    // JILI GAMES (Popular)
+    { id: 1, name: 'Super Ace', percentage: 85.2, players: 3241, trend: 'up', lastUpdate: new Date() },
+    { id: 2, name: 'Crazy Monkey', percentage: 78.5, players: 2856, trend: 'up', lastUpdate: new Date() },
+    { id: 3, name: 'Lucky God', percentage: 82.1, players: 2543, trend: 'stable', lastUpdate: new Date() },
+    { id: 4, name: 'Golden Beauty', percentage: 79.8, players: 2105, trend: 'up', lastUpdate: new Date() },
+    { id: 5, name: 'Fruit Party', percentage: 76.3, players: 1892, trend: 'down', lastUpdate: new Date() },
+    
+    // CQ9 GAMES (Popular)
+    { id: 6, name: 'Fire Kirin', percentage: 81.7, players: 3456, trend: 'up', lastUpdate: new Date() },
+    { id: 7, name: 'Golden Toad', percentage: 84.2, players: 2987, trend: 'up', lastUpdate: new Date() },
+    { id: 8, name: 'Hunting Treasure', percentage: 77.9, players: 2345, trend: 'stable', lastUpdate: new Date() },
+    
+    // SPRIBE GAMES
+    { id: 9, name: 'Aviator', percentage: 72.5, players: 4123, trend: 'up', lastUpdate: new Date() },
+    { id: 10, name: 'Turbo', percentage: 68.9, players: 3098, trend: 'down', lastUpdate: new Date() },
+    
+    // PRAGMATIC PLAY GAMES
+    { id: 11, name: 'Gates of Olympus', percentage: 80.3, players: 2654, trend: 'up', lastUpdate: new Date() },
+    { id: 12, name: 'Sweet Bonanza', percentage: 83.7, players: 3012, trend: 'up', lastUpdate: new Date() },
+    { id: 13, name: 'Starlight Princess', percentage: 79.1, players: 2789, trend: 'stable', lastUpdate: new Date() },
+    { id: 14, name: 'Aztec Blaze', percentage: 75.4, players: 2134, trend: 'down', lastUpdate: new Date() },
+    
+    // WAZDAN GAMES
+    { id: 15, name: 'Book of Relics', percentage: 81.8, players: 1876, trend: 'up', lastUpdate: new Date() },
+    { id: 16, name: 'Burning Reels', percentage: 77.2, players: 1543, trend: 'stable', lastUpdate: new Date() },
+    
+    // NETENT GAMES
+    { id: 17, name: 'Starburst XXL', percentage: 78.6, players: 2456, trend: 'up', lastUpdate: new Date() },
+    { id: 18, name: 'Divine Fortune', percentage: 82.4, players: 2098, trend: 'up', lastUpdate: new Date() },
+    
+    // MICROGAMING GAMES
+    { id: 19, name: 'Mega Moolah', percentage: 86.1, players: 2341, trend: 'up', lastUpdate: new Date() },
+    { id: 20, name: 'Immortal Romance', percentage: 80.9, players: 1987, trend: 'stable', lastUpdate: new Date() },
 ];
 
 let currentGames = [...gameDatabase];
 let currentSortBy = 'percentage-high';
 let currentSearchTerm = '';
+let isRealTimeMode = false; // Set to true when connecting to real API
 
 // Initialize the application
 document.addEventListener('DOMContentLoaded', () => {
     setupEventListeners();
     updateDashboard();
-    setInterval(simulateDataUpdate, 5000); // Auto-refresh every 5 seconds
+    
+    // Auto-refresh every 5 seconds
+    // Adjust interval based on API rate limits (usually min 3-5 seconds)
+    setInterval(simulateDataUpdate, 5000);
 });
 
 // Setup event listeners
@@ -50,26 +85,78 @@ function setupEventListeners() {
     });
 }
 
-// Simulate real-time data updates
+// =====================================
+// IMPORTANT: FOR REAL-TIME DATA
+// =====================================
+// Replace this entire function with your actual API call:
+// 
+// async function simulateDataUpdate() {
+//     try {
+//         const response = await fetch('YOUR_ARENA_PLUS_API_ENDPOINT', {
+//             method: 'GET',
+//             headers: {
+//                 'Authorization': 'Bearer YOUR_API_KEY',
+//                 'Content-Type': 'application/json'
+//             }
+//         });
+//         
+//         if (!response.ok) throw new Error('API Error');
+//         const data = await response.json();
+//         
+//         // Map API response to game format
+//         currentGames = data.games.map(game => ({
+//             id: game.gameId,
+//             name: game.gameName,
+//             percentage: game.winPercentage,
+//             players: game.activePlayers,
+//             trend: calculateTrend(game.previousPercentage, game.winPercentage),
+//             lastUpdate: new Date(game.lastUpdated)
+//         }));
+//         
+//         updateDashboard();
+//     } catch (error) {
+//         console.error('Failed to fetch real-time data:', error);
+//     }
+// }
+
+// Simulate real-time data updates (DEMO MODE)
 function simulateDataUpdate() {
-    // Add small random variations to percentages
+    if (isRealTimeMode) {
+        // TODO: Replace with actual API call
+        return;
+    }
+
+    // For DEMO: Add small random variations to percentages
     currentGames.forEach(game => {
-        const variation = (Math.random() - 0.5) * 3; // -1.5 to +1.5
+        // Simulate percentage changes (±1% fluctuation)
+        const variation = (Math.random() - 0.5) * 2;
         game.percentage = Math.max(50, Math.min(100, game.percentage + variation));
         game.percentage = Math.round(game.percentage * 10) / 10;
 
-        // Random player count variation
+        // Simulate player count changes (±200 players)
         const playerVariation = Math.floor((Math.random() - 0.5) * 400);
         game.players = Math.max(100, game.players + playerVariation);
 
-        // Random trend
-        const trends = ['up', 'down', 'stable'];
-        game.trend = trends[Math.floor(Math.random() * trends.length)];
+        // Random trend changes (less frequently)
+        if (Math.random() > 0.7) {
+            const trends = ['up', 'down', 'stable'];
+            game.trend = trends[Math.floor(Math.random() * trends.length)];
+        }
 
         game.lastUpdate = new Date();
     });
 
     updateDashboard();
+}
+
+// Calculate trend based on percentage change
+function calculateTrend(previousPercentage, currentPercentage) {
+    if (!previousPercentage) return 'stable';
+    
+    const change = currentPercentage - previousPercentage;
+    if (change > 1) return 'up';
+    if (change < -1) return 'down';
+    return 'stable';
 }
 
 // Update the entire dashboard
