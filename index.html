@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arena Plus - Real-Time Game Percentage Tracker</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <h1>🎮 Arena Plus Game Tracker</h1>
+                <p class="subtitle">Real-Time Game Percentage Performance</p>
+            </div>
+            <div class="header-time">
+                <span class="last-update">Last Update: <span id="lastUpdate">--:--:--</span></span>
+            </div>
+        </header>
+
+        <!-- Controls -->
+        <div class="controls">
+            <div class="filter-group">
+                <input type="text" id="searchInput" placeholder="Search games..." class="search-box">
+                <select id="sortSelect" class="sort-select">
+                    <option value="percentage-high">Highest Percentage</option>
+                    <option value="percentage-low">Lowest Percentage</option>
+                    <option value="name">Game Name (A-Z)</option>
+                    <option value="players">Most Players</option>
+                </select>
+                <button id="refreshBtn" class="refresh-btn">🔄 Refresh Now</button>
+            </div>
+            <div class="stats-summary">
+                <div class="stat-card">
+                    <span class="stat-label">Total Games</span>
+                    <span class="stat-value" id="totalGames">0</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-label">Avg Percentage</span>
+                    <span class="stat-value" id="avgPercentage">0%</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-label">Highest Rate</span>
+                    <span class="stat-value highlight-high" id="highestRate">0%</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-label">Lowest Rate</span>
+                    <span class="stat-value highlight-low" id="lowestRate">0%</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Games Table -->
+        <div class="table-wrapper">
+            <table class="games-table">
+                <thead>
+                    <tr>
+                        <th class="rank">Rank</th>
+                        <th class="name">Game Name</th>
+                        <th class="percentage">Win %</th>
+                        <th class="players">Active Players</th>
+                        <th class="status">Status</th>
+                        <th class="trend">Trend</th>
+                    </tr>
+                </thead>
+                <tbody id="gamesTableBody">
+                    <!-- Games will be populated here by JavaScript -->
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Game Details Cards -->
+        <div class="details-section">
+            <h2>Top Performers</h2>
+            <div class="cards-container" id="topPerformers">
+                <!-- Top performer cards will be populated here -->
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>Arena Plus Real-Time Tracker | Last Update: <span id="footerTime">--:--:--</span></p>
+            <p class="auto-refresh-notice">🔄 Auto-refreshing every 5 seconds</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
